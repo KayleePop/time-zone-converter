@@ -43,7 +43,7 @@
     const timestamp = parseInt(hash)
 
     // show if date is included in link
-    if (typeof timestamp === 'number') {
+    if (!isNaN(timestamp)) {
         document.getElementById('share').style = ''
         document.getElementById('date').style = ''
     } else {

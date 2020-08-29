@@ -6,10 +6,8 @@
 </div>
 
 <div id="pickerDiv">
-    choose a date to share:
-    <br>
-    <input id="picker">
-    <button id="submit">create</button>
+    <input id="picker" placeholder="click here to choose a date">
+    <button id="submit">Create Event</button>
 </div>
 
 <style>
@@ -23,14 +21,16 @@
         vertical-align: center;
     }
     body {
-        width: 100vw;
         min-height: 100vh;
+        font-size: 2em;
     }
-    #share input {
+    #share input, #picker {
         width: 100%;
     }
     #date {
-        font-size: 4em;
+        font-size: 2em;
+        padding: 1rem;
+        background-color: gainsboro;
     }
 </style>
 
@@ -40,15 +40,17 @@
 
 <script>
     const hash = location.hash.replace('#', '') // contains the #
+    const timestamp = parseInt(hash)
 
     // show if date is included in link
-    if (hash) {
+    if (typeof timestamp === 'number') {
         document.getElementById('share').style = ''
         document.getElementById('date').style = ''
+    } else {
+        loocation.hash = '' // if invalid timestamp is included as hash, redirect to homepage for creating new event
     }
 
     // set up Date display in local time
-    const timestamp = parseInt(hash)
     const date = new Date(timestamp)
     document.getElementById('date').innerText = date
 

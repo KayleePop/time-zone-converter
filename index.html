@@ -1,0 +1,74 @@
+<div class="flex" id="date" style="display: none;"></div>
+
+<div class="flex" id="share" style="display: none">
+    Share this link to display this time in someone's local timezone
+    <input onClick="this.select()" type="text" readonly>
+</div>
+
+<div id="pickerDiv">
+    choose a date to share:
+    <br>
+    <input id="picker">
+    <button id="submit">create</button>
+</div>
+
+<style>
+    body, .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        vertical-align: center;
+    }
+    body {
+        width: 100vw;
+        min-height: 100vh;
+    }
+    #share input {
+        width: 100%;
+    }
+    #date {
+        font-size: 4em;
+    }
+</style>
+
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    const hash = location.hash.replace('#', '') // contains the #
+
+    // show if date is included in link
+    if (hash) {
+        document.getElementById('share').style = ''
+        document.getElementById('date').style = ''
+    }
+
+    // set up Date display in local time
+    const timestamp = parseInt(hash)
+    const date = new Date(timestamp)
+    document.getElementById('date').innerText = date
+
+    // set up share link as this url
+    const shareInput = document.querySelector('#share input')
+    shareInput.value = location.href
+
+    // set up date picker
+    const fp = window.flatpickr('#picker', { enableTime: true })
+    const button = document.getElementById('submit')
+
+    // when create is clicked, reload page with timestamp hash
+    button.onclick = () => {
+        const date = fp.selectedDates[0]
+        const timestamp = date.getTime()
+
+        location.hash = timestamp
+        location.reload()
+        return false
+    }
+
+    window.onhashchange = () => location.reload()
+</script>

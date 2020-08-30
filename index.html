@@ -21,8 +21,10 @@
         vertical-align: center;
     }
     body {
-        min-height: 100vh;
+        height: 100vh;
+        width: 100vw;
         font-size: 1.5em;
+        margin: 0;
     }
     input, button { /* make inputs and buttons respect the font-size setting in body {} */
         font-size: inherit;
@@ -33,8 +35,8 @@
     }
     #date {
         font-size: 2em;
-        padding: 1rem;
-        width: 100vw;
+        padding: 1rem 0;
+        width: 100%;
         background-color: gainsboro;
     }
 </style>

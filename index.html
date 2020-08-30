@@ -22,7 +22,10 @@
     }
     body {
         min-height: 100vh;
-        font-size: 2em;
+        font-size: 1.5em;
+    }
+    input, button { /* make inputs and buttons respect the font-size setting in body {} */
+        font-size: inherit;
     }
     #share input {
         width: 100%;
